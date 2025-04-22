@@ -1,0 +1,16 @@
+# .gitignore
+node_modules/
+dist/
+.env
+*.log
+.DS_Store
+
+# React Native
+android/
+ios/
+build/
+*.keystore
+
+# IDEs
+.vscode/
+.idea/
