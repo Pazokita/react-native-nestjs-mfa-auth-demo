@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet, Text } from 'react-native';
 import { useAuth } from '../context/AuthProvider';
-import { COLORS, SPACING } from '../shared/theme/theme';
+import { COLORS, SPACING } from '../../../shared/theme/theme';
 
 export const LoginScreen = () => {
   const { signIn } = useAuth();
