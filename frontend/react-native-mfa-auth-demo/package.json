@@ -11,7 +11,9 @@
   "dependencies": {
     "@expo-google-fonts/montserrat": "^0.3.0",
     "axios": "^1.8.4",
+    "dotenv": "^16.5.0",
     "expo": "~52.0.46",
+    "expo-constants": "~17.0.8",
     "expo-font": "~13.0.4",
     "expo-secure-store": "^14.0.1",
     "expo-status-bar": "~2.0.1",
