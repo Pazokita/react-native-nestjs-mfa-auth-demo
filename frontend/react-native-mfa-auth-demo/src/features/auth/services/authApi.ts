@@ -10,9 +10,9 @@ export const login = async (email: string, password: string) => {
     return response.data;
   };
 
-export const verifyOtp = async (code: string, sessionToken: string) => {
+export const verifyOtp = async (otp: string, sessionToken: string) => {
   const response = await axiosInstance.post('/auth/verify-otp', {
-    code,
+    otp,
     sessionToken,
   });
 
