@@ -1,23 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { useAuth } from '../context/AuthProvider';
 import { FONTS } from '../../../shared/theme/fonts';
 import { COLORS } from '../../../shared/theme/theme';
 
 export default function LoginScreen() {
+  const { signIn } = useAuth();
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = () => {
+    signIn(email, password);
+  };
+
   return (
     <View style={styles.container}>
-      {/* <Image source={require('@/assets/login-image.png')} style={styles.image} /> */}
 
       <Text style={styles.title}>Démo MFA</Text>
 
-      <TextInput placeholder="Email" style={styles.input} />
-      <TextInput placeholder="Mot de passe" secureTextEntry style={styles.input} />
+      <TextInput
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
+        style={styles.input}
+        keyboardType="email-address"
+        autoCapitalize="none"
+      />
+      <TextInput
+        placeholder="Mot de passe"
+        value={password}
+        onChangeText={setPassword}
+        style={styles.input}
+        secureTextEntry
+      />
 
       <TouchableOpacity>
         <Text style={styles.forgotPassword}>Mot de passe oublié ?</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
         <Text style={styles.buttonText}>Se connecter</Text>
       </TouchableOpacity>
     </View>
