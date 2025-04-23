@@ -3,7 +3,6 @@ import React, {
   useContext,
   useState,
   ReactNode,
-  useEffect,
 } from 'react';
 import { Alert } from 'react-native';
 import { login, verifyOtp } from '../services/authApi';
@@ -21,12 +20,12 @@ type AuthContextType = {
   sessionToken: string | null;
   accessToken: string | null;
   signIn: (email: string, password: string) => Promise<void>;
-  verifyOtpCode: (code: string) => Promise<void>;
+  verifyOtpCode: (otp: string) => Promise<void>;
   signOut: () => void;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
+console.log('📨 Tentative login');
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [sessionToken, setSessionToken] = useState<string | null>(null);
@@ -35,18 +34,21 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const isAuthenticated = !!accessToken;
 
   const signIn = async (email: string, password: string) => {
+    console.log('📨 Tentative login avec :', email, password);
     try {
       const res = await login(email, password);
+      console.log('✅ Réponse login :', res);
       setSessionToken(res.sessionToken);
     } catch (err) {
-      Alert.alert('Erreur', "Email ou mot de passe invalide");
+      console.log('❌ Erreur login :', err);
+      Alert.alert('Erreur', 'Email ou mot de passe invalide');
     }
   };
 
-  const verifyOtpCode = async (code: string) => {
+  const verifyOtpCode = async (otp: string) => {
     try {
       if (!sessionToken) return;
-      const { accessToken, refreshToken, user } = await verifyOtp(code, sessionToken);
+      const { accessToken, refreshToken, user } = await verifyOtp(otp, sessionToken);
       await SecureStore.setItemAsync('accessToken', accessToken);
       await SecureStore.setItemAsync('refreshToken', refreshToken);
       setAccessToken(accessToken);
