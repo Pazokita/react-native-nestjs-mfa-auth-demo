@@ -8,10 +8,10 @@ export default {
     orientation: "portrait",
     icon: "./assets/icon.png",
     splash: {
-      image: "./assets/splash.png",
-      resizeMode: "contain",
-      backgroundColor: "#ffffff"
+      backgroundColor: '#ffffff',
+      resizeMode: 'contain',
     },
+    newArchEnabled: true,
     updates: {
       fallbackToCacheTimeout: 0
     },
