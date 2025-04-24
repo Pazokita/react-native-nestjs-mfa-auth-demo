@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { randomInt } from 'crypto';
+import * as crypto from 'crypto';
 
 @Injectable()
 export class OtpService {
   private otpStore = new Map<string, { code: string; expires: number; userId: string }>();
 
   generateOtp(userId: string): string {
-    const code = randomInt(100000, 999999).toString();
+    const code = crypto.randomInt(100000, 999999).toString();
     const sessionToken = crypto.randomUUID();
 
     this.otpStore.set(sessionToken, {
